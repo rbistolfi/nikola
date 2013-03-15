@@ -38,9 +38,10 @@ from docutils.core import publish_parts
 import unittest
 import nikola.plugins.compile_rest
 from nikola.utils import _reload
+from base import BaseTestCase
 
 
-class ReSTExtensionTestCase(unittest.TestCase):
+class ReSTExtensionTestCase(BaseTestCase):
     """ Base class for testing ReST extensions """
 
     sample = None
@@ -71,14 +72,6 @@ class ReSTExtensionTestCase(unittest.TestCase):
                 self.assertTrue(arg_attrs.issubset(tag_attrs))
             if text:
                 self.assertIn(text, tag.text)
-
-    def assertIn(self, member, container, msg=None):
-        """ Missing in 2.6. Uses TestCase.assertIn if present """
-        parent = super(ReSTExtensionTestCase, self)
-        try:
-            parent.assertIn(member, container, msg=msg)
-        except AttributeError:
-            self.assertTrue(member in container)
 
 
 class ReSTExtensionTestCaseTestCase(ReSTExtensionTestCase):
